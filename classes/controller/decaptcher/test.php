@@ -4,7 +4,7 @@
  */
 class Controller_DeCaptcher_Test extends Controller {
 
-    public function action_index()
+	public function action_index()
 	{
 		try
 		{
