@@ -29,7 +29,7 @@ class Kohana_DeCaptcher {
 
 	/**
 	 * Loads configuration
-	 * 
+	 *
 	 */
 	public function __construct()
 	{
@@ -65,10 +65,6 @@ class Kohana_DeCaptcher {
 			CURLOPT_POSTFIELDS => $post
 		));
 
-		$ch = curl_init();
-
-		curl_setopt_array($ch, $options);
-
 		while ($code !== 0
 			AND $code !== DeCaptcher_Codes::ccERR_TEXT_SIZE
 			AND $code !== DeCaptcher_Codes::ccERR_BALANCE
@@ -86,11 +82,20 @@ class Kohana_DeCaptcher {
 				':tries' => $this->_tries,
 			));
 
+			$ch = curl_init();
+
+			curl_setopt_array($ch, $options);
+
 			$body = curl_exec($ch);
 
 			$code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
 			curl_close($ch);
+
+			if ( ! strpos($code, '2') === 0)
+			{
+				return new DeCaptcher_Response(FALSE, 'cURL error');
+			}
 
 			$response = DeCaptcher::check_response($code, $body);
 
@@ -171,27 +176,18 @@ class Kohana_DeCaptcher {
 
 	public static function check_response($code, $body = '')
 	{
-		if ( ! strpos($code, '2') === 0)
-			return (object) array(
-				'code' => $code,
-				'body' => $body
-			);
-
 		if (strlen($body) === 0)
 			return (object) array(
 				'code' => $code,
 				'body' => 'wrong settings'
 			);
 
-
 		if (preg_match('/^-?[0-9]+$/', $body))
 		{
-			$code = FALSE;
+			$code = (int) $body;
 
-			if($body < 0)
+			if($code < 0)
 			{
-				$code = (int) $code;
-
 				switch($code)
 				{
 					case DeCaptcher_Codes::ccERR_GENERAL:
@@ -223,14 +219,18 @@ class Kohana_DeCaptcher {
 						break;
 				}
 			}
+			/*
 			elseif ($body < 10)
 			{
 				$code = $body;
 
 				$error = 'Malformed output data';
 			}
+			*/
 			else
 			{
+				$code = FALSE;
+
 				$error = 'HTTR ERROR '.$body;
 			}
 
