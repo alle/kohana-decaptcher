@@ -31,9 +31,15 @@ class Kohana_DeCaptcher {
 	 * Loads configuration
 	 *
 	 */
-	public function __construct()
+	public function __construct($tries = NULL, $try_delays = NULL, $timeout = NULL)
 	{
 		$this->_config = Kohana::$config->load('decaptcher');
+
+		$tries OR $this->_tries = $tries;
+
+		$try_delays OR $this->_try_delay = $try_delays;
+
+		$timeout OR $this->_timeout = $timeout;
 	}
 
 	/**
