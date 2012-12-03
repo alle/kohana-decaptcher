@@ -1,5 +1,10 @@
 <?php defined('SYSPATH') or die('No direct access allowed.');
-
+/**
+ * Output/error code from the De-Captcher service
+ *
+ * @package kohana-decaptcher
+ * @author Alessandro Frangioni
+ */
 final class DeCaptcher_Codes {
 
 	const ccERR_OK         = 0; // everything went OK

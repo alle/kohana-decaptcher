@@ -1,7 +1,10 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 /**
  * DeCatpcher Test Controller
- */
+ *
+ * @package kohana-decaptcher
+ * @author Alessandro Frangioni
+*/
 class Controller_DeCaptcher_Test extends Controller {
 
 	public function action_index()

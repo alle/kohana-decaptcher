@@ -1,8 +1,8 @@
 <?php defined('SYSPATH') or die('No direct access allowed.');
 /**
- * Simple w
+ * Basic wrapper for De-Captcher service
  *
- * @package DeCaptcher
+ * @package kohana-decaptcher
  * @author Alessandro Frangioni
  */
 class Kohana_DeCaptcher {

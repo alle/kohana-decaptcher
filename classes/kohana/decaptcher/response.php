@@ -1,5 +1,10 @@
 <?php defined('SYSPATH') or die('No direct access allowed.');
-
+/**
+ * Resspone from de De-Captcher service
+ *
+ * @package kohana-decaptcher
+ * @author Alessandro Frangioni
+ */
 class Kohana_DeCaptcher_Response {
 
 	protected $_data = array(
