@@ -35,11 +35,11 @@ class Kohana_DeCaptcher {
 	{
 		$this->_config = Kohana::$config->load('decaptcher');
 
-		$tries OR $this->_tries = $tries;
+		$tries AND $this->_tries = $tries;
 
-		$try_delays OR $this->_try_delay = $try_delays;
+		$try_delays AND $this->_try_delay = $try_delays;
 
-		$timeout OR $this->_timeout = $timeout;
+		$timeout AND $this->_timeout = $timeout;
 	}
 
 	/**
