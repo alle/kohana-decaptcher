@@ -5,7 +5,7 @@
  * @package kohana-decaptcher
  * @author Alessandro Frangioni
 */
-class Controller_DeCaptcher_Test extends Controller {
+class Controller_Decaptcher_Test extends Controller {
 
 	public function action_index()
 	{
